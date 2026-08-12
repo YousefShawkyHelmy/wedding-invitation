@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wedding Invitation | Yousef & Rogina</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Desktop Background Cover (only visible on large screens) -->
+  <div class="desktop-background"></div>
+
+  <!-- Main Mobile Container -->
+  <div class="mobile-frame" id="invitation-app">
+    
+    <!-- Hero / Cover Section -->
+    <section class="section hero" id="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <span class="hero-subtitle animate-fade-in">Save The Date</span>
+        <h1 class="hero-names animate-fade-up">Yousef <span class="ampersand">&</span> Rogina</h1>
+        <p class="hero-tagline animate-fade-in">We are getting married!</p>
+        <div class="hero-date animate-fade-up">23 . 08 . 2026</div>
+        <div class="scroll-indicator animate-bounce">
+          <i class="fa-solid fa-chevron-down"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- Welcome & Story Section -->
+    <section class="section story reveal">
+      <div class="decor-flourish top-decor">
+        <svg viewBox="0 0 100 20" width="100" height="20">
+          <path d="M10 10 Q 30 0, 50 10 T 90 10" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+          <circle cx="50" cy="10" r="3" fill="#d4af37"/>
+        </svg>
+      </div>
+      <span class="section-subtitle">Join us in our celebration</span>
+      <h2 class="section-title">The Wedding Invitation</h2>
+      <p class="story-text">
+        Because you have shared in our lives by your friendship and love, we invite you to share in our joy as we exchange our marriage vows.
+      </p>
+      <div class="decor-flourish bottom-decor">
+        <svg viewBox="0 0 100 20" width="100" height="20">
+          <path d="M10 10 Q 30 20, 50 10 T 90 10" fill="none" stroke="#d4af37" stroke-width="1.5"/>
+          <circle cx="50" cy="10" r="3" fill="#d4af37"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Calendar Section -->
+    <section class="section calendar-section reveal">
+      <h2 class="section-title">Save Our Date</h2>
+      <p class="calendar-desc">August 2026</p>
+      
+      <!-- Calendar Grid -->
+      <div class="calendar-container">
+        <div class="calendar-header">
+          <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+        </div>
+        <div class="calendar-grid">
+          <!-- August 2026 starts on Saturday (1st) -->
+          <!-- 5 empty cells (Sunday to Thursday) if Sunday is start, wait! -->
+          <!-- Let's check:
+               Sunday is the first column: Su Mo Tu We Th Fr Sa.
+               August 1, 2026 is Saturday. So empty cells are: Su (0), Mo (1), Tu (2), We (3), Th (4), Fr (5).
+               So 6 empty cells! Let's see:
+               Su Mo Tu We Th Fr Sa
+                                  1
+                2  3  4  5  6  7  8
+                9 10 11 12 13 14 15
+               16 17 18 19 20 21 22
+               23 24 25 26 27 28 29
+               30 31
+               Yes! The first week has 6 empty cells.
+          -->
+          <span class="empty-day"></span>
+          <span class="empty-day"></span>
+          <span class="empty-day"></span>
+          <span class="empty-day"></span>
+          <span class="empty-day"></span>
+          <span class="empty-day"></span>
+          <span>1</span>
+          <span>2</span>
+          <span>3</span>
+          <span>4</span>
+          <span>5</span>
+          <span>6</span>
+          <span>7</span>
+          <span>8</span>
+          <span>9</span>
+          <span>10</span>
+          <span>11</span>
+          <span>12</span>
+          <span>13</span>
+          <span>14</span>
+          <span>15</span>
+          <span>16</span>
+          <span>17</span>
+          <span>18</span>
+          <span>19</span>
+          <span>20</span>
+          <span>21</span>
+          <span>22</span>
+          <!-- August 23 is highlighted with a heart -->
+          <span class="special-day">23<span class="heart-marker"><i class="fa-regular fa-heart"></i></span></span>
+          <span>24</span>
+          <span>25</span>
+          <span>26</span>
+          <span>27</span>
+          <span>28</span>
+          <span>29</span>
+          <span>30</span>
+          <span>31</span>
+        </div>
+      </div>
+
+      <!-- Countdown Timer -->
+      <div class="countdown-container">
+        <div class="countdown-item">
+          <span id="days">00</span>
+          <p>Days</p>
+        </div>
+        <div class="countdown-item">
+          <span id="hours">00</span>
+          <p>Hours</p>
+        </div>
+        <div class="countdown-item">
+          <span id="minutes">00</span>
+          <p>Min</p>
+        </div>
+        <div class="countdown-item">
+          <span id="seconds">00</span>
+          <p>Sec</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Details Section (Date, Time, Location) -->
+    <section class="section details-section reveal">
+      <h2 class="section-title">Wedding Ceremony</h2>
+      
+      <!-- Card for Date & Time -->
+      <div class="detail-card">
+        <div class="card-icon">
+          <i class="fa-regular fa-clock"></i>
+        </div>
+        <h3>Date & Time</h3>
+        <p class="card-highlight">Sunday, August 23, 2026</p>
+        <p>Ceremony starts at 7:00 PM</p>
+      </div>
+
+      <!-- Card for Location -->
+      <div class="detail-card">
+        <div class="card-icon">
+          <i class="fa-solid fa-church"></i>
+        </div>
+        <h3>The Ceremony Venue</h3>
+        <p class="card-highlight">St. Athanasius Church</p>
+        <p class="card-address">
+          St. Athanasius Church, Alexandria, Egypt
+        </p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Al+Fanan+Mohammed+Othman%2C+6XPQ%2BRMP%2C+Street%2C+Dana+Al+Gadidah+WA+Izbat+Al+Westaneyah%2C+El+Raml+2%2C+Alexandria+Governorate+21111" target="_blank" class="map-btn">
+          <i class="fa-solid fa-location-dot"></i> View on Google Maps
+        </a>
+      </div>
+    </section>
+
+
+    <!-- RSVP & Guestbook / Comments Section -->
+    <section class="section comments-section reveal" id="comments">
+      <div class="decor-corner top-left"></div>
+      <div class="decor-corner top-right"></div>
+      
+      <div class="wax-seal animate-bounce">
+        <span class="wax-seal-text">Y&R</span>
+      </div>
+
+      <h2 class="section-title">Wishes & RSVP</h2>
+      <p class="section-subtitle">Leave a blessing for the newlyweds</p>
+
+      <form id="comment-form" class="comment-form">
+        <div class="form-group">
+          <label for="guest-name">Your Name</label>
+          <input type="text" id="guest-name" required placeholder="E.g., John Doe">
+        </div>
+
+        <div class="form-group">
+          <label for="rsvp-status">Will you attend?</label>
+          <div class="rsvp-toggle-group">
+            <label class="rsvp-option">
+              <input type="radio" name="rsvp" value="yes" checked>
+              <span>Joyfully Accept</span>
+            </label>
+            <label class="rsvp-option">
+              <input type="radio" name="rsvp" value="no">
+              <span>Regretfully Decline</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group slide-fade" id="guest-count-group">
+          <label for="guest-count">Number of Guests</label>
+          <select id="guest-count" class="elegant-select">
+            <option value="1">1 Guest</option>
+            <option value="2" selected>2 Guests</option>
+            <option value="3">3 Guests</option>
+            <option value="4">4+ Guests</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="comment-text">Wishes / Blessings</label>
+          <div class="decorated-textbox-wrapper">
+            <textarea id="comment-text" rows="4" required placeholder="Write your warm wishes here..."></textarea>
+            <!-- Ornamental Border Elements -->
+            <div class="textbox-ornament top-left-ornament"></div>
+            <div class="textbox-ornament top-right-ornament"></div>
+            <div class="textbox-ornament bottom-left-ornament"></div>
+            <div class="textbox-ornament bottom-right-ornament"></div>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          <span>Send Wishes</span>
+          <i class="fa-regular fa-paper-plane"></i>
+        </button>
+      </form>
+
+      <!-- Wishes Wall / Comments List -->
+      <div class="wishes-wall-container">
+        <h3>Wishes Wall</h3>
+        <div id="wishes-list" class="wishes-list">
+          <!-- Will be populated dynamically via JavaScript -->
+        </div>
+      </div>
+
+      <div class="footer-note">
+        <p>With Love,</p>
+        <p class="footer-names">Yousef & Rogina</p>
+        <p class="footer-copyright">&copy; 2026. Made with love.</p>
+      </div>
+
+      <div class="decor-corner bottom-left"></div>
+      <div class="decor-corner bottom-right"></div>
+    </section>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
