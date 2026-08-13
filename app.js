@@ -1,3 +1,12 @@
+
+const SUPABASE_URL = "https://xyzyfigzanqbynwjnrpp.supabase.co";
+const SUPABASE_KEY = "sb_publishable_sm1cd0QRCFM9JZ58xYpvdQ_OT-El8QQ";
+
+const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
 document.addEventListener("DOMContentLoaded", () => {
   /* ==========================================
      SCROLL REVEAL (INTERSECTION OBSERVER)
@@ -89,50 +98,6 @@ document.addEventListener("DOMContentLoaded", () => {
     toggleGuestCount();
   }
 
-  // Pre-populated default wishes to make the wall look lively and elegant from the start
-  const defaultWishes = [
-    {
-      name: "Monica & Peter",
-      rsvp: "yes",
-      guestCount: 2,
-      text: "Sending you both all of our love. We cannot wait to see Rogina in her beautiful dress and celebrate this special milestone with you both!",
-      timestamp: new Date("2026-08-11T14:30:00").getTime()
-    },
-    {
-      name: "Uncle George & Family",
-      rsvp: "yes",
-      guestCount: 4,
-      text: "Congratulations Yousef and Rogina! May your joint path be filled with happiness, understanding, and infinite love. See you on the 23rd!",
-      timestamp: new Date("2026-08-12T09:15:00").getTime()
-    },
-    {
-      name: "Sherif Kamal",
-      rsvp: "no",
-      guestCount: 0,
-      text: "Warmest congratulations on your wedding! I am deeply sorry I won't be able to attend due to work travel, but my heart and prayers are with you both.",
-      timestamp: new Date("2026-08-12T11:45:00").getTime()
-    }
-  ];
-
-  // Load wishes from LocalStorage or use defaults
-  function getWishes() {
-    const stored = localStorage.getItem("wedding_wishes");
-    if (stored) {
-      try {
-        return JSON.parse(stored);
-      } catch (e) {
-        console.error("Error parsing stored wishes, resetting to defaults", e);
-      }
-    }
-    // Save defaults to storage on first load
-    localStorage.setItem("wedding_wishes", JSON.stringify(defaultWishes));
-    return defaultWishes;
-  }
-
-  // Save wishes to LocalStorage
-  function saveWishes(wishes) {
-    localStorage.setItem("wedding_wishes", JSON.stringify(wishes));
-  }
 
   // Format timestamp nicely
   function formatTime(timestamp) {
@@ -143,6 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Render wishes to the list
   function renderWishes() {
+    if (!wishesList) return;
     const wishes = getWishes();
     // Sort by newest first
     wishes.sort((a, b) => b.timestamp - a.timestamp);
@@ -237,8 +203,91 @@ document.addEventListener("DOMContentLoaded", () => {
         submitBtn.disabled = false;
       }, 2500);
     });
-  }
 
-  // Initial render
+    // Initial render
+    renderWishes();
+
+    // Message handling
+    const messageForm = document.getElementById("message-form");
+    const messagesList = document.getElementById("messages-list");
+
+    function getMessages() {
+      const stored = localStorage.getItem("wedding_messages");
+      if (stored) {
+        try {
+          return JSON.parse(stored);
+        } catch (e) {
+          console.error("Error parsing stored messages, resetting", e);
+        }
+      }
+      return [];
+    }
+    function saveMessages(messages) {
+      localStorage.setItem("wedding_messages", JSON.stringify(messages));
+    }
+    function renderMessages() { if (!messagesList) return;
+      const messages = getMessages();
+      messages.sort((a, b) => b.timestamp - a.timestamp);
+      messagesList.innerHTML = "";
+      messages.forEach(msg => {
+        const card = document.createElement("div");
+        card.className = "wish-card";
+        card.innerHTML = `
+          <div class="wish-header">
+            <span class="wish-name">${escapeHTML(msg.name)}</span>
+          </div>
+          <p class="wish-text">"${escapeHTML(msg.text)}"</p>
+          <div class="wish-time">${formatTime(msg.timestamp)}</div>
+        `;
+        messagesList.appendChild(card);
+      });
+    }
+    if (messageForm) {
+      messageForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const nameInput = document.getElementById("message-name");
+        const textInput = document.getElementById("message-text");
+        const nameText = nameInput.value.trim();
+        const messageText = textInput.value.trim();
+
+        if (!nameText || !messageText) {
+          alert("Please enter both your name and a message.");
+          return;
+        }
+
+        const submitBtn = messageForm.querySelector(".submit-btn");
+        const original = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        
+        try {
+          const { error } = await supabaseClient
+            .from("messages")
+            .insert({ name: nameText, message: messageText });
+
+          if (error) {
+            throw error;
+          }
+
+          nameInput.value = "";
+          textInput.value = "";
+          
+          submitBtn.innerHTML = `<span>Sent!</span> <i class="fa-solid fa-heart" style="color: var(--heart-red); animation: pulse-heart 0.5s infinite alternate;"></i>`;
+          submitBtn.style.backgroundColor = "hsl(120, 30%, 30%)";
+          
+          setTimeout(() => {
+            submitBtn.innerHTML = original;
+            submitBtn.style.backgroundColor = "";
+            submitBtn.disabled = false;
+          }, 2500);
+        } catch (error) {
+          console.error("Error saving message:", error);
+          alert("There was an error sending your message. Please try again.");
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = original;
+        }
+      });
+    }
+    renderMessages();// Initial render
+  }
   renderWishes();
 });

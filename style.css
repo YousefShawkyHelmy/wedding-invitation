@@ -3,11 +3,13 @@
    ========================================== */
 :root {
   /* Color Palette */
-  --bg-cream: hsl(38, 40%, 98%);
+  --bg-cream: hsl(38, 40%, 100%);
   --bg-card: hsl(0, 0%, 100%);
   --text-dark: hsl(30, 15%, 20%);
+  --text-darker: hsl(30, 15%, 12%);
   --text-muted: hsl(30, 8%, 45%);
   --gold: hsl(43, 60%, 48%);
+  --gold-dark: hsl(43, 60%, 40%);
   --gold-light: hsl(43, 60%, 94%);
   --gold-glow: hsla(43, 60%, 48%, 0.3);
   --blush: hsl(340, 45%, 95%);
@@ -37,7 +39,7 @@
 }
 
 body {
-  background-color: hsl(38, 20%, 93%);
+  background-color: hsl(38, 20%, 96%);
   font-family: var(--font-sans);
   color: var(--text-dark);
   display: flex;
@@ -133,13 +135,8 @@ body {
   background-color: var(--bg-cream);
 }
 
-.section-title {
-  font-family: var(--font-serif);
-  font-size: 2.2rem;
-  font-weight: 500;
-  color: var(--text-dark);
-  margin-bottom: 8px;
-  letter-spacing: 1px;
+.message-section .section-title {
+  color: var(--text-darker);
 }
 
 .section-subtitle {
@@ -518,23 +515,26 @@ body {
 .wax-seal {
   width: 76px;
   height: 76px;
-  background: radial-gradient(circle, hsl(354, 70%, 54%) 0%, hsl(354, 70%, 35%) 100%);
-  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
-  font-family: var(--font-serif);
-  font-weight: 700;
-  font-size: 1.25rem;
-  letter-spacing: 1px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.22), inset 0 2px 4px rgba(255,255,255,0.25), inset 0 -4px 6px rgba(0,0,0,0.45);
-  border: 2px solid hsl(354, 75%, 28%);
+  background: var(--bg-cream); /* match page background */
+  border: none; /* Remove border */
   margin-bottom: 24px;
   position: relative;
   transform: rotate(-8deg);
   z-index: 2;
 }
+
+.wax-seal-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.22);
+  filter: hue-rotate(0deg) saturate(1) brightness(0.9); /* slightly darker gold */
+}
+
 
 .wax-seal::after {
   content: '';

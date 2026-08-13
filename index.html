@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wedding Invitation | Yousef & Rogina</title>
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -173,89 +173,43 @@
           <i class="fa-solid fa-location-dot"></i> View on Google Maps
         </a>
       </div>
-    </section>
 
-
-    <!-- RSVP & Guestbook / Comments Section -->
-    <section class="section comments-section reveal" id="comments">
+    <!-- Message / Autograph Section -->
+    <section class="section message-section reveal" id="message-section">
       <div class="decor-corner top-left"></div>
       <div class="decor-corner top-right"></div>
-      
-      <div class="wax-seal animate-bounce">
-        <span class="wax-seal-text">Y&R</span>
-      </div>
 
-      <h2 class="section-title">Wishes & RSVP</h2>
-      <p class="section-subtitle">Leave a blessing for the newlyweds</p>
+  
 
-      <form id="comment-form" class="comment-form">
+      <h2 class="section-title">Leave us a Message</h2>
+<p class="section-subtitle">Share your wishes or a personal note with the couple</p>
+
+      <form id="message-form" class="comment-form">
         <div class="form-group">
-          <label for="guest-name">Your Name</label>
-          <input type="text" id="guest-name" required placeholder="E.g., John Doe">
+          <label for="message-name">Your Name</label>
+          <input type="text" id="message-name" required >
         </div>
-
         <div class="form-group">
-          <label for="rsvp-status">Will you attend?</label>
-          <div class="rsvp-toggle-group">
-            <label class="rsvp-option">
-              <input type="radio" name="rsvp" value="yes" checked>
-              <span>Joyfully Accept</span>
-            </label>
-            <label class="rsvp-option">
-              <input type="radio" name="rsvp" value="no">
-              <span>Regretfully Decline</span>
-            </label>
-          </div>
-        </div>
-
-        <div class="form-group slide-fade" id="guest-count-group">
-          <label for="guest-count">Number of Guests</label>
-          <select id="guest-count" class="elegant-select">
-            <option value="1">1 Guest</option>
-            <option value="2" selected>2 Guests</option>
-            <option value="3">3 Guests</option>
-            <option value="4">4+ Guests</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="comment-text">Wishes / Blessings</label>
+          <label for="message-text">Message</label>
           <div class="decorated-textbox-wrapper">
-            <textarea id="comment-text" rows="4" required placeholder="Write your warm wishes here..."></textarea>
-            <!-- Ornamental Border Elements -->
+            <textarea id="message-text" rows="4" required placeholder="Write your warm wishes here..."></textarea>
             <div class="textbox-ornament top-left-ornament"></div>
             <div class="textbox-ornament top-right-ornament"></div>
             <div class="textbox-ornament bottom-left-ornament"></div>
             <div class="textbox-ornament bottom-right-ornament"></div>
           </div>
         </div>
-
         <button type="submit" class="submit-btn">
-          <span>Send Wishes</span>
+          <span>Send Message</span>
           <i class="fa-regular fa-paper-plane"></i>
         </button>
       </form>
-
-      <!-- Wishes Wall / Comments List -->
-      <div class="wishes-wall-container">
-        <h3>Wishes Wall</h3>
-        <div id="wishes-list" class="wishes-list">
-          <!-- Will be populated dynamically via JavaScript -->
-        </div>
-      </div>
-
-      <div class="footer-note">
-        <p>With Love,</p>
-        <p class="footer-names">Yousef & Rogina</p>
-        <p class="footer-copyright">&copy; 2026. Made with love.</p>
-      </div>
-
-      <div class="decor-corner bottom-left"></div>
-      <div class="decor-corner bottom-right"></div>
     </section>
 
-  </div>
+    <!-- Wishes & RSVP section removed -->
 
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="app.js"></script>
 </body>
 </html>
