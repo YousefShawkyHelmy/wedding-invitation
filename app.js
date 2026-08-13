@@ -202,7 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
         submitBtn.style.backgroundColor = "";
         submitBtn.disabled = false;
       }, 2500);
-    }
+    });
     
     // Initial render
     renderWishes();
