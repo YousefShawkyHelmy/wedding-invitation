@@ -2,12 +2,18 @@
 const SUPABASE_URL = "https://xyzyfigzanqbynwjnrpp.supabase.co";
 const SUPABASE_KEY = "sb_publishable_sm1cd0QRCFM9JZ58xYpvdQ_OT-El8QQ";
 
-const supabaseClient = supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
+let supabaseClient = null;
 
 document.addEventListener("DOMContentLoaded", () => {
+  try {
+    if (typeof supabase !== "undefined") {
+      supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    } else {
+      console.error("Supabase is not loaded.");
+    }
+  } catch (err) {
+    console.error("Error initializing Supabase:", err);
+  }
   /* ==========================================
      SCROLL REVEAL (INTERSECTION OBSERVER)
      ========================================== */
