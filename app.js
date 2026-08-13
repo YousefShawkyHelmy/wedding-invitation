@@ -202,92 +202,98 @@ document.addEventListener("DOMContentLoaded", () => {
         submitBtn.style.backgroundColor = "";
         submitBtn.disabled = false;
       }, 2500);
-    });
-
+    }
+    
     // Initial render
     renderWishes();
 
-    // Message handling
-    const messageForm = document.getElementById("message-form");
-    const messagesList = document.getElementById("messages-list");
+  } // End if (commentForm)
 
-    function getMessages() {
-      const stored = localStorage.getItem("wedding_messages");
-      if (stored) {
-        try {
-          return JSON.parse(stored);
-        } catch (e) {
-          console.error("Error parsing stored messages, resetting", e);
-        }
+  // Message handling (Moved out of commentForm block)
+  const messageForm = document.getElementById("message-form");
+  const messagesList = document.getElementById("messages-list");
+
+  function getMessages() {
+    const stored = localStorage.getItem("wedding_messages");
+    if (stored) {
+      try {
+        return JSON.parse(stored);
+      } catch (e) {
+        console.error("Error parsing stored messages, resetting", e);
       }
-      return [];
     }
-    function saveMessages(messages) {
-      localStorage.setItem("wedding_messages", JSON.stringify(messages));
-    }
-    function renderMessages() { if (!messagesList) return;
-      const messages = getMessages();
-      messages.sort((a, b) => b.timestamp - a.timestamp);
-      messagesList.innerHTML = "";
-      messages.forEach(msg => {
-        const card = document.createElement("div");
-        card.className = "wish-card";
-        card.innerHTML = `
-          <div class="wish-header">
-            <span class="wish-name">${escapeHTML(msg.name)}</span>
-          </div>
-          <p class="wish-text">"${escapeHTML(msg.text)}"</p>
-          <div class="wish-time">${formatTime(msg.timestamp)}</div>
-        `;
-        messagesList.appendChild(card);
-      });
-    }
-    if (messageForm) {
-      messageForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const nameInput = document.getElementById("message-name");
-        const textInput = document.getElementById("message-text");
-        const nameText = nameInput.value.trim();
-        const messageText = textInput.value.trim();
-
-        if (!nameText || !messageText) {
-          alert("Please enter both your name and a message.");
-          return;
-        }
-
-        const submitBtn = messageForm.querySelector(".submit-btn");
-        const original = submitBtn.innerHTML;
-        submitBtn.disabled = true;
-        
-        try {
-          const { error } = await supabaseClient
-            .from("messages")
-            .insert({ name: nameText, message: messageText });
-
-          if (error) {
-            throw error;
-          }
-
-          nameInput.value = "";
-          textInput.value = "";
-          
-          submitBtn.innerHTML = `<span>Sent!</span> <i class="fa-solid fa-heart" style="color: var(--heart-red); animation: pulse-heart 0.5s infinite alternate;"></i>`;
-          submitBtn.style.backgroundColor = "hsl(120, 30%, 30%)";
-          
-          setTimeout(() => {
-            submitBtn.innerHTML = original;
-            submitBtn.style.backgroundColor = "";
-            submitBtn.disabled = false;
-          }, 2500);
-        } catch (error) {
-          console.error("Error saving message:", error);
-          alert("There was an error sending your message. Please try again.");
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = original;
-        }
-      });
-    }
-    renderMessages();// Initial render
+    return [];
   }
+  
+  function saveMessages(messages) {
+    localStorage.setItem("wedding_messages", JSON.stringify(messages));
+  }
+  
+  function renderMessages() { 
+    if (!messagesList) return;
+    const messages = getMessages();
+    messages.sort((a, b) => b.timestamp - a.timestamp);
+    messagesList.innerHTML = "";
+    messages.forEach(msg => {
+      const card = document.createElement("div");
+      card.className = "wish-card";
+      card.innerHTML = `
+        <div class="wish-header">
+          <span class="wish-name">${escapeHTML(msg.name)}</span>
+        </div>
+        <p class="wish-text">"${escapeHTML(msg.text)}"</p>
+        <div class="wish-time">${formatTime(msg.timestamp)}</div>
+      `;
+      messagesList.appendChild(card);
+    });
+  }
+
+  if (messageForm) {
+    messageForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const nameInput = document.getElementById("message-name");
+      const textInput = document.getElementById("message-text");
+      const nameText = nameInput.value.trim();
+      const messageText = textInput.value.trim();
+
+      if (!nameText || !messageText) {
+        alert("Please enter both your name and a message.");
+        return;
+      }
+
+      const submitBtn = messageForm.querySelector(".submit-btn");
+      const original = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      
+      try {
+        const { error } = await supabaseClient
+          .from("messages")
+          .insert({ name: nameText, message: messageText });
+
+        if (error) {
+          throw error;
+        }
+
+        nameInput.value = "";
+        textInput.value = "";
+        
+        submitBtn.innerHTML = `<span>Sent!</span> <i class="fa-solid fa-heart" style="color: var(--heart-red); animation: pulse-heart 0.5s infinite alternate;"></i>`;
+        submitBtn.style.backgroundColor = "hsl(120, 30%, 30%)";
+        
+        setTimeout(() => {
+          submitBtn.innerHTML = original;
+          submitBtn.style.backgroundColor = "";
+          submitBtn.disabled = false;
+        }, 2500);
+      } catch (error) {
+        console.error("Error saving message:", error);
+        alert("There was an error sending your message. Please try again.");
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = original;
+      }
+    });
+  }
+  
+  renderMessages(); // Initial render
   renderWishes();
 });
