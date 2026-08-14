@@ -79,7 +79,7 @@ body {
 .mobile-frame {
   width: 100%;
   height: 100vh;
-  max-width: 480px;
+  max-width: 540px;
   position: relative;
   background-color: var(--bg-cream);
   overflow-y: auto;
