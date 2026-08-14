@@ -167,7 +167,7 @@ body {
   height: 100%;
   background-image: url('img.jpeg');
   background-size: cover;
-  background-position: center 30%;
+  background-position: center;
   z-index: 1;
   transform: scale(0.7);
   transition: transform 10s ease;
