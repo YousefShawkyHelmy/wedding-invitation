@@ -170,7 +170,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   z-index: 1;
-  transform: scale(0.7);
+  transform: scale(1.2);
   transition: transform 10s ease;
 }
 
