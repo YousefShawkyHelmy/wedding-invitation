@@ -159,6 +159,11 @@ body {
   overflow: hidden;
 }
 
+@keyframes autoZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+
 .hero-bg {
   position: absolute;
   top: 0;
@@ -167,14 +172,9 @@ body {
   height: 100%;
   background-image: url('img.jpeg');
   background-size: cover;
-  background-position: center;
+  background-position: center 30%;
   z-index: 1;
-  transform: scale(0.7);
-  transition: transform 10s ease;
-}
-
-.hero:hover .hero-bg {
-  transform: scale(1.1);
+  animation: autoZoom 10s ease-out forwards;
 }
 
 .hero-overlay {
