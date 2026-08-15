@@ -160,7 +160,7 @@ body {
 }
 
 @keyframes autoZoom {
-  from { transform: scale(0.6); }
+  from { transform: scale(0.7); }
   to { transform: scale(0.9); }
 }
 
