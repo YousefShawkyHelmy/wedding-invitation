@@ -160,7 +160,7 @@ body {
 }
 
 @keyframes autoZoom {
-  from { transform: scale(1); }
+  from { transform: scale(0.9); }
   to { transform: scale(1.1); }
 }
 
@@ -174,7 +174,7 @@ body {
   background-size: cover;
   background-position: center;
   z-index: 1;
-  animation: autoZoom 10s ease-out forwards;
+  animation: autoZoom 5s ease-out forwards;
 }
 
 .hero-overlay {
