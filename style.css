@@ -160,8 +160,8 @@ body {
 }
 
 @keyframes autoZoom {
-  from { transform: scale(1); }
-  to { transform: scale(1.1); }
+  from { transform: scale(0.99); }
+  to { transform: scale(1.05); }
 }
 
 .hero-bg {
